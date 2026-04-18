@@ -42,10 +42,10 @@ if st.button("Calculate BMI"):
             st.success("You are a healthy weight")
             
         elif bmi < 30:
-            st.info("You are overweight")
+            st.warning("You are overweight")
 
         else:
-            st.info("You are obese")
+            st.warning("You are obese")
             
     elif unit_select == "Imperial":  # imperial 
         
@@ -62,10 +62,10 @@ if st.button("Calculate BMI"):
             st.success("You are a healthy weight")
             
         elif bmi < 30:
-            st.info("You are overweight")
+            st.warning("You are overweight")
 
         else:
-            st.info("You are obese")
+            st.warning("You are obese")
 
         
         
