@@ -1,6 +1,13 @@
 # solid data ranges
 
-bmi_ranges = ((0, 18.4), (18.5, 24.9), (25, 29.9), (30, 34.9), (35, 39.9), (40, float("inf")))
+bmi_ranges = {
+    (0, 18.4): "Underweight",
+    (18.5, 24.9): "Healthy Weight",
+    (25, 29.9): "Overweight",
+    (30, 34.9): "Obese Class I",
+    (35, 39.9): "Obese Class II",
+    (40, float("inf")): "Obese Class III"
+}
 
 body_fat_men = {
     (2, 5): "Essential fat",

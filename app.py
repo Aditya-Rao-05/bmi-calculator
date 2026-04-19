@@ -1,72 +1,52 @@
 import streamlit as st
+from data_ranges import bmi_ranges, body_fat_men, body_fat_women
 
 st.title("BMI Calculator")
 st.subheader("For your BMI needs")
 
-unit_select = st.radio("Choose your units: ", ["Metric", "Imperial"]) # button to select imperial or metric
+unit = st.radio("Choose your units: ", ["Metric", "Imperial"]) # button to select imperial or metric
 
 
-if unit_select == "Metric":
-    
-    height = st.number_input("Enter your height in centimeters: ", min_value = 0.1, step = 0.1)
-    #height_slider = st.slider("Pick a value between 0 and 250 cms")
-
-    weight = st.number_input("Enter your weight in kilograms: ", min_value = 0.1, step = 0.1)
-    #weight_slider = st.slider("Pick a weight between 0 and 250 kgs")
+if unit == "Metric":
+    height = st.number_input("Height (cm): ", min_value = 0.1, step = 0.1)
+    weight = st.number_input("Weight (kg): ", min_value = 0.1, step = 0.1)
     
 else:
+    height_imp = st.number_input("Height (inches): ", min_value = 0.1, step = 0.1)
+    weight_imp = st.number_input("Weight (lbs): ", min_value = 0.1, step = 0.1)
     
-    height_imp = st.number_input("Enter your height in inches: ", min_value = 0.1, step = 0.1)
-    weight_imp = st.number_input("Enter your weight in lbs: ", min_value = 0.1, step = 0.1)
+    
+def get_category(value, category_dict):
+    for (low, high), label in category_dict.items(): # parses and splits the brackets (ranges of bmis) and also the associated label
+        if low <= value <= high:
+            return label
+    return "Unknown"
 
-# metric calculation
+
 if st.button("Calculate BMI"):
-    
-    if unit_select == "Metric":
-    
-        height_cms = height/100
-        bmi = weight / (height_cms**2)
+    if unit == "Metric":
+        height_metres = height/100
+        height_sq = height_metres**2
+        bmi = weight / height_sq 
+    else:
+        height_sq = height_imp**2
+        bmi = (weight_imp/(height_sq)) * 703
         
-        st.write(f"Your bmi is: {bmi:.1f}")
-
-        if bmi < 18.5:
-            st.warning("You are underweight")
-            
-        elif bmi < 25:
-            st.success("You are a healthy weight")
-            
-        elif bmi < 30:
-            st.warning("You are overweight")
-
-        else:
-            st.warning("You are obese")
-            
-    elif unit_select == "Imperial":  # imperial calculation
-        height_isq = height_imp**2
-        bmi = weight_imp / (height_isq)*703
-
-        st.write(f"Your bmi is {bmi:.1f}")
-        
-        if bmi < 18.5:
-            st.warning("You are underweight")
-            
-        elif bmi < 25:
-            st.success("You are a healthy weight")
-            
-        elif bmi < 30:
-            st.warning("You are overweight")
-
-        else:
-            st.warning("You are obese")
-
-# optional bf % calculation
-
-"""bf_known = st.checkbox("I know my bf percentage")
-bf_unknown = st.checkbox("I don't know my body fat percentage")
-if bf_known:
-    if bmi > 30 and bf"""
-
+    st.write(f"Your BMI is: {bmi:.1f}")
+    
+    bmi_category = get_category(bmi, bmi_ranges)
+    
+    if bmi_category == "Healthy Weight":
+        st.success(bmi_category)
+    else:
+        st.warning(bmi_category)
+    
+    
+    
+    
+    
     
     
         
-        
+    
+
