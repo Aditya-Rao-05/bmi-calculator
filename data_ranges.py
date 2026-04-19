@@ -1,4 +1,5 @@
 # solid data ranges
+import streamlit as st
 
 bmi_ranges = {
     (0, 18.4): "Underweight",
@@ -27,3 +28,11 @@ body_fat_women = {
     (38, float("inf")): "Obese"
 }
 
+displays = {
+    "Underweight": st.warning,
+    "Heathy Weight": st.success,
+    "Overweight": st.warning,
+    "Obese Class I": st.error,
+    "Obese Class II": st.error,
+    "Obese Class III": st.error    
+}
