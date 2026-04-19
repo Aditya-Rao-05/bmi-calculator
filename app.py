@@ -1,13 +1,6 @@
 import streamlit as st
 from data_ranges import bmi_ranges, body_fat_male, body_fat_female
 
-"""  
-    # parses each dictionary item 
-    # each key is a tuple item (0, 18.4)
-    # each value is a string category ex. "Overweight"
-    # the tuple is unpacked into 'low', 'high'
-"""
-    
 def get_category(value, category_dict):
     for (low, high), label in category_dict.items(): 
         if low <= value <= high:
