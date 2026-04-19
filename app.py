@@ -19,13 +19,7 @@ else:
     height_imp = st.number_input("Enter your height in inches: ", min_value = 0.1, step = 0.1)
     weight_imp = st.number_input("Enter your weight in lbs: ", min_value = 0.1, step = 0.1)
 
-
-
-    
-
 # metric calculation
-
-
 if st.button("Calculate BMI"):
     
     if unit_select == "Metric":
@@ -47,9 +41,7 @@ if st.button("Calculate BMI"):
         else:
             st.warning("You are obese")
             
-    elif unit_select == "Imperial":  # imperial 
-        
-
+    elif unit_select == "Imperial":  # imperial calculation
         height_isq = height_imp**2
         bmi = weight_imp / (height_isq)*703
 
@@ -67,10 +59,12 @@ if st.button("Calculate BMI"):
         else:
             st.warning("You are obese")
 
-        
-        
+# optional bf % calculation
 
-        
+"""bf_known = st.checkbox("I know my bf percentage")
+bf_unknown = st.checkbox("I don't know my body fat percentage")
+if bf_known:
+    if bmi > 30 and bf"""
 
     
     
